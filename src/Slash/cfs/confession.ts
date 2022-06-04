@@ -15,7 +15,7 @@ export const slash: Slash = {
         }
     ],
     run: async (client, interaction) => {
-        const guild = client.guilds.cache.get('954143786114646016');
+        const guild = client.guilds.cache.get(process.env.GUILD_ID || '');
         const isInGuild = await guild?.members.fetch(interaction.user.id);
         if (!isInGuild || (isInGuild instanceof Collection)) return interaction.reply('Bạn đang không trong server!');
 
@@ -45,7 +45,7 @@ export const slash: Slash = {
         
         const actionRow = new MessageActionRow().addComponents([button1, button2]);
 
-        const reviewChannel = guild?.channels.cache.get('982655776818618428');
+        const reviewChannel = guild?.channels.cache.get(process.env.REVIEW_CONFESSION_CHANNEL || '');
         if (reviewChannel?.type === 'GUILD_TEXT') {
             const msg = await reviewChannel.send({ embeds: [embed], components: [actionRow]});
             await pushConfession({

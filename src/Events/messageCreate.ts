@@ -7,7 +7,7 @@ export const event: Event = {
     name: 'messageCreate',
     run: async (client: Client, message: Message) => {
         if (message.author.bot) return;
-        const guild = client.guilds.cache.get('954143786114646016');
+        const guild = client.guilds.cache.get(process.env.GUILD_ID || '');
         const isInGuild = await guild?.members.fetch(message.author.id);
 
         if (!isInGuild || (isInGuild instanceof Collection)) return message.channel.send('Bạn đang không trong server!');
@@ -38,7 +38,7 @@ export const event: Event = {
             
             const actionRow = new MessageActionRow().addComponents([button1, button2]);
 
-            const reviewChannel = guild?.channels.cache.get('982655776818618428');
+            const reviewChannel = guild?.channels.cache.get(process.env.REVIEW_CONFESSION_CHANNEL || '');
             if (reviewChannel?.type === 'GUILD_TEXT') {
                 const msg = await reviewChannel.send({ embeds: [embed], components: [actionRow]});
                 await pushConfession({

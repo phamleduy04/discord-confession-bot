@@ -17,7 +17,7 @@ export const event: Event = {
             const confession = await getConfession(interaction.message.id);
             switch(interaction.customId) {
                 case 'duyet': {
-                    const cfsChannel = interaction.guild?.channels.cache.get('982655789695127592');
+                    const cfsChannel = interaction.guild?.channels.cache.get(process.env.CONFESSION_CHANNEL || '');
                     if (cfsChannel?.type !== 'GUILD_TEXT') return;
                     const confessionEmbed = new MessageEmbed(interaction.message.embeds[0])
                         .setFooter({ text: 'Trả lời confession ở dưới' })
