@@ -19,8 +19,14 @@
 - Thay đổi `MONGODB` bằng link tới mongodb
 - `npm start`
 
-### Replit, Heroku
+### Replit
 - Giống với chạy trực tiếp nhưng add thêm dòng dưới vào `src/Bot.ts`
 ```js
 require('http').createServer((req:any, res:any) => res.end('Bot is alive!')).listen(3000)
+```
+
+### Heroku
+- Giống với chạy trực tiếp nhưng add thêm dòng dưới vào `src/Bot.ts`
+```js
+require('http').createServer((req:any, res:any) => res.end('Bot is alive!')).listen(process.env.PORT)
 ```
