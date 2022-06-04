@@ -3,10 +3,13 @@ import { Collection } from './collection';
 import 'dotenv/config';
 
 const mongo: MongoClient = new MongoClient(process.env.MONGODB || 'mongodb://localhost/cfs');
-mongo.connect().then(() => console.log('Connected to MongoDB'));
-
-const mongoCollection = mongo.db().collection('cfs');
-const db = new Collection(mongoCollection, mongo.startSession());
+let mongoCollection;
+let db: Collection;
+mongo.connect().then(() => {
+    console.log('Connected to MongoDB');
+    mongoCollection = mongo.db().collection('cfs');
+    db = new Collection(mongoCollection, mongo.startSession())
+});
 
 const getConfessionCount = async () : Promise<number> => {
     return await db.all().then(confessions => confessions.filter((el: { ID: string, data: Confession[]}) => el.ID.startsWith('confession')).length);
