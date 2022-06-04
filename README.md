@@ -7,6 +7,7 @@
 - Clone repo về
 - Đổi tên `example.env` thành `.env`
 - Thay đổi `TOKEN` bằng Token của bot
+- Thay đổi `GUILD_ID`, `REVIEW_CONFESSION_CHANNEL`, `CONFESSION_CHANNEL`.
 - Xoá dòng `MONGODB`
 - `docker-compose up -d` để chạy container
 
@@ -16,6 +17,7 @@
 - `npm i`
 - Đổi tên `example.env` thành `.env`
 - Thay đổi `TOKEN` bằng token của bot
+- Thay đổi `GUILD_ID`, `REVIEW_CONFESSION_CHANNEL`, `CONFESSION_CHANNEL`.
 - Thay đổi `MONGODB` bằng link tới mongodb
 - `npm start`
 
