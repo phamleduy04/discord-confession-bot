@@ -1,0 +1,23 @@
+version: '3.6'
+
+services:
+  bot-cfs-db:
+    container_name: bot-cfs-db
+    image: docker.io/bitnami/mongodb:4.2
+    networks:
+      - bot-cfs-net
+  bot-cfs: 
+    image: ghcr.io/phamleduy04/discord-confession-bot:alpine
+    container_name: bot-cfs
+    networks:
+      - bot-cfs-net
+    environment:
+      MONGODB: mongodb://bot-cfs-db:27017/cfs
+    restart: always
+    depends_on:
+      - bot-cfs-db
+    env_file: 
+      - .env
+
+networks:
+  bot-cfs-net:
