@@ -18,3 +18,9 @@
 - Thay đổi `TOKEN` bằng token của bot
 - Thay đổi `MONGODB` bằng link tới mongodb
 - `npm start`
+
+### Replit, Heroku
+- Giống với chạy trực tiếp nhưng add thêm dòng dưới vào `src/Bot.ts`
+```js
+require('http').createServer((req:any, res:any) => res.end('Bot is alive!')).listen(3000)
+```
