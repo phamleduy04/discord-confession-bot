@@ -8,6 +8,7 @@
 - Đổi tên `example.env` thành `.env`
 - Thay đổi `TOKEN` bằng Token của bot
 - Xoá dòng `MONGODB`
+- `docker-compose up -d` để chạy container
 
 ### Chạy trực tiếp
 - Cần tải nodejs
