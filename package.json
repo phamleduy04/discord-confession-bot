@@ -1,0 +1,31 @@
+{
+	"devDependencies": {
+		"@types/node": "^17.0.39",
+		"ts-node": "^10.8.1",
+		"typescript": "^4.7.3"
+	},
+	"name": "discord-confession-bot",
+	"version": "1.0.0",
+	"main": "dist/index.js",
+	"scripts": {
+		"start": "ts-node src/Bot.ts",
+		"build": "tsc",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/phamleduy04/discord-confession-bot.git"
+	},
+	"author": "phamleduy04",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/phamleduy04/discord-confession-bot/issues"
+	},
+	"homepage": "https://github.com/phamleduy04/discord-confession-bot#readme",
+	"description": "",
+	"dependencies": {
+		"discord.js": "^13.7.0",
+		"dotenv": "^16.0.1",
+		"mongodb": "^4.6.0"
+	}
+}
