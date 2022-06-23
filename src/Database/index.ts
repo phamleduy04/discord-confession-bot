@@ -23,7 +23,7 @@ const pushConfession = async (confession: Confession): Promise<void> => {
 const getConfession = async (messageID: string): Promise<Confession> => {
     const all = await db.all();
     const confession = all.find((el: { ID: string, data: Confession }) => el.data.reviewMessageID == messageID || el.data.messageID == messageID);
-    return confession.data;
+    return confession?.data;
 }
 
 const updateConfession = async (confession: Confession): Promise<void> => {

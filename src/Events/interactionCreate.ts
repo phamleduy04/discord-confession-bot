@@ -15,6 +15,7 @@ export const event: Event = {
         if (interaction.isButton()) {
             const message = await interaction.channel?.messages.fetch(interaction.message.id);
             const confession = await getConfession(interaction.message.id);
+            if (!confession) return;
             switch(interaction.customId) {
                 case 'duyet': {
                     const cfsChannel = interaction.guild?.channels.cache.get(process.env.CONFESSION_CHANNEL || '');
