@@ -1,4 +1,4 @@
-import { Client, Collection } from 'discord.js';
+import { Client, Collection, Partials } from 'discord.js';
 import 'dotenv/config';
 import type { Command, Event, Slash } from '../interfaces';
 import path from 'path';
@@ -13,7 +13,7 @@ class Bot extends Client {
     public constructor() {
         super({
             intents: 32767,
-            partials: ['CHANNEL'],
+            partials: [Partials.Channel],
             allowedMentions: { repliedUser: true },
         });
     }

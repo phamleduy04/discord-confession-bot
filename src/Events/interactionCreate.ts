@@ -1,5 +1,5 @@
 import type { Interaction } from 'discord.js';
-import { MessageEmbed } from 'discord.js';
+import { EmbedBuilder, ChannelType, ThreadAutoArchiveDuration } from 'discord.js';
 import { Event } from '../interfaces';
 import { getConfession, updateConfession } from '../Database';
 
@@ -13,17 +13,21 @@ export const event: Event = {
         }
 
         if (interaction.isButton()) {
+            if (interaction.channel?.type != ChannelType.GuildText) return;
             const message = await interaction.channel?.messages.fetch(interaction.message.id);
             const confession = await getConfession(interaction.message.id);
             if (!confession) return;
             switch(interaction.customId) {
                 case 'duyet': {
                     const cfsChannel = interaction.guild?.channels.cache.get(process.env.CONFESSION_CHANNEL || '');
-                    if (cfsChannel?.type !== 'GUILD_TEXT') return;
-                    const confessionEmbed = new MessageEmbed(interaction.message.embeds[0])
+                    if (cfsChannel?.type !== ChannelType.GuildText) return;
+                    const oldEmbed = interaction.message.embeds[0];
+                    const confessionEmbed = new EmbedBuilder()
+                        .setTitle(oldEmbed.title)
+                        .setDescription(oldEmbed.description)
                         .setFooter({ text: 'Trả lời confession ở dưới' })
                     const cfs = await cfsChannel.send({ embeds: [confessionEmbed] });
-                    const cfsThread = await cfs.startThread({ name: `Rep cfs ${confession.id}`, autoArchiveDuration: 'MAX' });
+                    const cfsThread = await cfs.startThread({ name: `Rep cfs ${confession.id}`, autoArchiveDuration: ThreadAutoArchiveDuration.OneWeek });
                     cfsThread.send('Bạn có thể trả lời confession tại đây!');
 
                     await updateConfession({
