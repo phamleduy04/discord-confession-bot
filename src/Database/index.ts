@@ -1,18 +1,15 @@
-import { MongoClient } from 'mongodb';
-import { Collection } from './collection';
 import 'dotenv/config';
+import Keyv from 'keyv';
 
-const mongo: MongoClient = new MongoClient(process.env.MONGODB || 'mongodb://localhost/cfs');
-let mongoCollection;
-let db: Collection;
-mongo.connect().then(() => {
-    console.log('Connected to MongoDB');
-    mongoCollection = mongo.db().collection('cfs');
-    db = new Collection(mongoCollection, mongo.startSession())
-});
+const db = new Keyv(process.env.DATABASE_URL || 'sqlite://confession.sqlite');
 
 const getConfessionCount = async () : Promise<number> => {
-    return await db.all().then(confessions => confessions.filter((el: { ID: string, data: Confession[]}) => el.ID.startsWith('confession')).length);
+    let count = 0;
+    for await (const [key, value] of db.iterator()) {
+        if (key && key.startsWith('confession')) count++;
+    };
+
+    return count;
 }
 
 const pushConfession = async (confession: Confession): Promise<void> => {
@@ -20,10 +17,10 @@ const pushConfession = async (confession: Confession): Promise<void> => {
     await db.set(`confession-${cfsCount + 1}`, confession);
 }
 
-const getConfession = async (messageID: string): Promise<Confession> => {
-    const all = await db.all();
-    const confession = all.find((el: { ID: string, data: Confession }) => el.data.reviewMessageID == messageID || el.data.messageID == messageID);
-    return confession?.data;
+const getConfession = async (messageID: string): Promise<Confession | undefined> => {
+    for await (const [key, value] of db.iterator()) {
+        if (value.reviewMessageID == messageID || value.messageID == messageID) return value;
+    };
 }
 
 const updateConfession = async (confession: Confession): Promise<void> => {

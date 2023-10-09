@@ -8,7 +8,7 @@
 - Đổi tên `example.env` thành `.env`
 - Thay đổi `TOKEN` bằng Token của bot
 - Thay đổi `GUILD_ID`, `REVIEW_CONFESSION_CHANNEL`, `CONFESSION_CHANNEL`.
-- Xoá dòng `MONGODB`
+- Xoá dòng `DATABASE_URL`
 - `docker-compose up -d` để chạy container
 
 ### Chạy trực tiếp
@@ -18,7 +18,7 @@
 - Đổi tên `example.env` thành `.env`
 - Thay đổi `TOKEN` bằng token của bot
 - Thay đổi `GUILD_ID`, `REVIEW_CONFESSION_CHANNEL`, `CONFESSION_CHANNEL`.
-- Thay đổi `MONGODB` bằng link tới mongodb
+- Thay đổi `DATABASE_URL` bằng link tới database (hỗ trợ redis, mongo, postgres, mysql, sqlite. Default SQLite) 
 - `npm start`
 
 ### Replit
