@@ -25,7 +25,7 @@
 	"description": "",
 	"dependencies": {
 		"@keyv/mongo": "^2.2.8",
-		"@keyv/mysql": "^1.7.0",
+		"@keyv/mysql": "1.7.2",
 		"@keyv/postgres": "^1.4.9",
 		"@keyv/redis": "^2.8.0",
 		"@keyv/sqlite": "^3.6.6",
